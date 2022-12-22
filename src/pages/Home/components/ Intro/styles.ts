@@ -1,14 +1,15 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components' 
 export const IntroDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 5.875rem;
+  margin-bottom:6.75rem;
+
 `
 
 export const CoffeeIntroduction = styled.div`
-
+flex:1;
   h1 {
     color: var(--base-titles);
     font-weight: 800;
@@ -70,4 +71,3 @@ export const ImgCoffee = styled(ImgIcon)`
 export const BackgroundImg = styled.div`
 
 `
-

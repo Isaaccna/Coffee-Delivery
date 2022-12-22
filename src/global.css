@@ -1,0 +1,38 @@
+
+
+:root {
+  --background: #FAFAFA;
+  --brand-purple: #8047F8;
+  --purple-light:#EBE5F9;
+  --purple-dark: #4B2995;
+  --base-card: #F3F3F2;
+  --base-text: #574F4D;
+  --yellow-dark: #C47F17;
+  --yellow-light: #F1E9C9;
+  --brand-yellow: #DBAC2C;
+  --base-subtitle: #403937;
+  --base-button: #E6E5E5;
+  --base-label: #8D8686;
+  --base-titles: #272221
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    -webkit-font-smoothing: antialiased;
+    background: var(--background)
+  }
+
+  body, input, button, p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+  }
+
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;

@@ -1,3 +1,10 @@
+import { Intro } from './components/ Intro'
+import { CoffeeList } from './components/CoffeeList'
 export function Home () {
-  return <h1>HOME</h1>
+  return (
+    <main>
+    <Intro />
+    <CoffeeList />
+    </main>
+  )
 }
