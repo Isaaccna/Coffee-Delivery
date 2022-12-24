@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { CoffeeCard } from '../CoffeeCard'
 import { MainContainer } from './styles'
 
+
 const ourCoffees = [
   {
     id: uuidv4(),
@@ -135,12 +136,7 @@ export function CoffeeList() {
           return (
             <CoffeeCard
               key={coffee.id}
-              id={coffee.id}
-              picture={coffee.picture}
-              feature={coffee.feature}
-              title={coffee.title}
-              description={coffee.description}
-              price={coffee.price}
+              coffee={coffee}
             />
           )
         })}
