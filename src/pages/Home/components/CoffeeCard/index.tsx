@@ -1,5 +1,4 @@
 import { ShoppingCart, Plus, Minus } from 'phosphor-react'
-
 import {
   CardContainer,
   CartButton,
@@ -9,9 +8,8 @@ import {
   InputContainer,
   InputQuantityContainer
 } from './styles'
-import { useState } from 'react'
-import { useCart } from '../../../../hooks/useCart'
-
+import { useState, useContext } from 'react'
+import { CartContext } from '../../../../contexts/CartContext'
 
 export interface Coffee {
   id: string
@@ -28,7 +26,8 @@ interface CoffeeProps {
 
 export function CoffeeCard({ coffee }: CoffeeProps) {
   const [quantity, setQuantity] = useState(1)
-  const { addCoffeeToCart } = useCart()
+  const { addCoffeeToCart } = useContext(CartContext)
+ 
 
   function handleIncreaseQuantity() {
     setQuantity(state => quantity + 1)
@@ -38,13 +37,13 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
   }
 
   function handleAddCoffeeToCart() {
-    const coffeeToAdd = {
+    const newCoffee = {
       ...coffee,
       quantity
     }
-    addCoffeeToCart (coffeeToAdd)
 
-    console.log(coffeeToAdd)
+    addCoffeeToCart(newCoffee)
+    console.log(newCoffee)
   }
 
   const priceDecimal = coffee.price.toFixed(2)

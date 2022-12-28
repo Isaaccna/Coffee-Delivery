@@ -1,15 +1,14 @@
-import {createContext, ReactNode, useState} from'react'
-import { Coffee} from '../pages/Home/components/CoffeeCard'
+import {createContext, ReactNode, useState, useReducer} from'react'
+import {produce} from 'immer'
+import { Coffee } from '../pages/Home/components/CoffeeCard';
 
-
-export interface CartItem  {
-coffee:  Coffee;
-quantity: number;
-}
+export interface CartItem extends Coffee {
+  quantity: number;
+  }
 
 interface CartContextType {
   cartItems: CartItem[] | undefined;
-  addCoffeeToCart: (coffee: Coffee, quantity: number) => void
+   addCoffeeToCart: (coffee : CartItem) => void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -21,18 +20,21 @@ interface CartContextProviderProps {
 export function CartContextProvider({ children }: CartContextProviderProps) {
 const [cartItems, setCartItems] = useState<CartItem[]>([])
 
-function addCoffeeToCart (coffee: Coffee, quantity: number) {
- 
-  const hasProductIndex = cartItems.findIndex(
-    (item) => item.coffee.id === coffee.id,
-  )
-  if (hasProductIndex < 0) {
-  const newCoffee = [
-    ...cartItems, {coffee, quantity}
-  ]
 
-  setCartItems(newCoffee)
-}
+function addCoffeeToCart(coffee: CartItem) {
+  const alreadyInCart = cartItems.findIndex(
+    (cartItems) => cartItems.id === coffee.id,
+  )
+
+  const newCart = produce(cartItems, (draft) => {
+    if (alreadyInCart < 0) {
+      draft.push(coffee)
+    } else {
+      draft[alreadyInCart].quantity += coffee.quantity
+    }
+  })
+
+  setCartItems(newCart)
 }
 
 return (
