@@ -123,8 +123,11 @@ const ourCoffees = [
   }
 ]
 
+console.log(ourCoffees);
+
+
 export function CoffeeList() {
-  const [coffees, setCoffees] = useState(ourCoffees)
+  const coffees = ourCoffees
 
   return (
     <MainContainer>
@@ -137,6 +140,7 @@ export function CoffeeList() {
             <CoffeeCard
               key={coffee.id}
               coffee={coffee}
+      
             />
           )
         })}

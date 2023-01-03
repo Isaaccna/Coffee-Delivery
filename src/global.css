@@ -13,7 +13,8 @@
   --base-subtitle: #403937;
   --base-button: #E6E5E5;
   --base-label: #8D8686;
-  --base-titles: #272221
+  --base-titles: #272221;
+  --base-input: #EDEDED;
 }
 
 * {

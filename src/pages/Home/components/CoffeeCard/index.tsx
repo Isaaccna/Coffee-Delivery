@@ -10,6 +10,7 @@ import {
 } from './styles'
 import { useState, useContext } from 'react'
 import { CartContext } from '../../../../contexts/CartContext'
+import { InputQuantity } from '../../../../components/InputQuantity'
 
 export interface Coffee {
   id: string
@@ -25,9 +26,8 @@ interface CoffeeProps {
 }
 
 export function CoffeeCard({ coffee }: CoffeeProps) {
+
   const [quantity, setQuantity] = useState(1)
-  const { addCoffeeToCart } = useContext(CartContext)
- 
 
   function handleIncreaseQuantity() {
     setQuantity(state => quantity + 1)
@@ -35,6 +35,9 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
   function handleDecreaseQuantity() {
     setQuantity(state => quantity - 1)
   }
+  const { addCoffeeToCart } = useContext(CartContext)
+
+
 
   function handleAddCoffeeToCart() {
     const newCoffee = {
@@ -63,17 +66,10 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
         <p>
           R$<span>{priceDecimal}</span>
         </p>
-        <InputQuantityContainer>
-          <button disabled={quantity <= 1} onClick={handleDecreaseQuantity}>
-            {' '}
-            <Minus />{' '}
-          </button>
-          <input type="number" readOnly placeholder="1" value={quantity} />
-
-          <button onClick={handleIncreaseQuantity}>
-            <Plus />{' '}
-          </button>
-        </InputQuantityContainer>
+   <InputQuantity 
+   onIncrease={handleIncreaseQuantity}
+   onDecrease={handleDecreaseQuantity}
+   quantity={quantity} />
 
         <CartButton onClick={handleAddCoffeeToCart}>
           <ShoppingCart weight="fill" size={22} />

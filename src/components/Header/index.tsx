@@ -42,7 +42,9 @@ export function Header() {
 
   return (
     <HeaderContainer>
+      <NavLink to="/">
       <img src={Logo} alt="Logo" />
+      </NavLink>
 
       <nav>
         <LocationContainer>
