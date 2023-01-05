@@ -6,11 +6,11 @@ import {
   CoffeeTitles,
   FeatureList,
   InputContainer,
-  InputQuantityContainer
 } from './styles'
 import { useState, useContext } from 'react'
 import { CartContext } from '../../../../contexts/CartContext'
 import { InputQuantity } from '../../../../components/InputQuantity'
+
 
 export interface Coffee {
   id: string

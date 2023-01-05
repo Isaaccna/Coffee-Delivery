@@ -1,15 +1,20 @@
 import {createContext, ReactNode, useState, useReducer, useEffect} from'react'
 import {produce} from 'immer'
 import { Coffee } from '../pages/Home/components/CoffeeCard';
+import { TotalPerItem } from '../pages/Checkout/components/CoffeeCart/styles';
 
 export interface CartItem extends Coffee {
   quantity: number;
   }
 
 interface CartContextType {
-  cartItems: CartItem[] | undefined;
+  cartItems: CartItem[]
    addCoffeeToCart: (coffee : CartItem) => void
-   changeCartItemsQuantity: (coffeeId: string, type: 'increase' | 'decrease') => void
+   changeCartItemsQuantity: (cartItemId: string, type: 'increase' | 'decrease') => void,
+   removeCartItem: (cartItemId: string) => void,
+   cartQuantity: number,
+   cartItemsTotal: number
+
 }
 
 
@@ -33,7 +38,6 @@ return []
 
 
 
-
 function addCoffeeToCart(coffee: CartItem) {
   const alreadyInCart = cartItems.findIndex(
     (cartItems) => cartItems.id === coffee.id,
@@ -50,13 +54,15 @@ function addCoffeeToCart(coffee: CartItem) {
   setCartItems(newCart)
 }
 
+ 
+
 function changeCartItemsQuantity(
-  coffeeId: string,
-  type: 'increase' | 'decrease'
+  cartItemId: string,
+  type: 'increase' | 'decrease',
 ) {
   const newCart = produce(cartItems, (draft) => {
     const coffeeExistsInCart = cartItems.findIndex(
-      (cartItem) => cartItem.id === coffeeId,
+      (cartItem) => cartItem.id === cartItemId,
     )
     if (coffeeExistsInCart >= 0) {
       const item = draft[coffeeExistsInCart]
@@ -68,6 +74,24 @@ function changeCartItemsQuantity(
   setCartItems(newCart)
 }
 
+function removeCartItem(cartItemId: string) {
+  const newCart = produce(cartItems, (draft) => {
+    const coffeeExistsInCart = cartItems.findIndex(
+      (cartItem) => cartItem.id === cartItemId,
+    )
+
+    if (coffeeExistsInCart >= 0) {
+      draft.splice(coffeeExistsInCart, 1)
+    }
+  })
+
+  setCartItems(newCart)
+}
+
+const cartQuantity = cartItems.length
+const cartItemsTotal = cartItems.reduce((total, cartItem) => {
+  return total + cartItem.price * cartItem.quantity
+}, 0)
 
 useEffect(()=> {
   localStorage.setItem('COFFEE-CART-1.0', JSON.stringify(cartItems))
@@ -77,7 +101,10 @@ return (
   <CartContext.Provider value={{
     cartItems,
     addCoffeeToCart,
-    changeCartItemsQuantity
+    changeCartItemsQuantity,
+    removeCartItem,
+    cartQuantity,
+    cartItemsTotal
   } }>
     {children}
   </CartContext.Provider>

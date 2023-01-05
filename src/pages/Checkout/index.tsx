@@ -1,24 +1,15 @@
-import { MapPin, CurrencyDollarSimple, CreditCard, Bank, Trash } from 'phosphor-react'
-import { ButtonsCardContainer, CardListContainer, FormContainer, FormIntro, HalfSizeInput, InputBase, InputContainer, InputDiv, InputMiddleSize, ItemCardContainer, LargerSizeInput, PageContainer, PaymentButton, PaymentButtonContainer, RemoveButton, SmallSizeInput } from './styles'
+import { MapPin, CurrencyDollarSimple, CreditCard, Bank} from 'phosphor-react' 
+import { CardListContainer, FormContainer, FormIntro, HalfSizeInput, InputBase, InputContainer, InputDiv, InputMiddleSize, LargerSizeInput, PageContainer, PaymentButton, PaymentButtonContainer, SmallSizeInput } from './styles'
 
 import { CartContext, CartItem } from '../../contexts/CartContext'
 import { useContext } from 'react'
-import { InputQuantity } from '../../components/InputQuantity'
+import { CoffeeCart } from './components/CoffeeCart'
+import { ConfirmOrderSection } from './components/ConfirmOrderSection'
 
-interface CartContextProps {
-  coffee: CartItem
-}
 
-export function Checkout({coffee}: CartContextProps) {
- const {cartItems, changeCartItemsQuantity} = useContext(CartContext)
-
- function handleDecrease() {
-  changeCartItemsQuantity(coffee.id, 'decrease')
-}
-
-function handleIncrease() {
-  changeCartItemsQuantity(coffee.id, 'increase')
-}
+export function Checkout() {
+const {cartItems} = useContext(CartContext)
+  
   return (
   <PageContainer>
 <main>
@@ -76,41 +67,15 @@ function handleIncrease() {
 
 <CardListContainer>
  {cartItems?.map(coffee => {
-  return (
-    <ItemCardContainer key={coffee.id}>
-      <img src={coffee.picture} />
-      <div>
-        <h3>{coffee.title}</h3>
-        <ButtonsCardContainer>
-          <InputQuantity 
-          quantity={coffee.quantity}
-          onIncrease={handleIncrease}
-          onDecrease={handleDecrease} />
+  return ( 
+<CoffeeCart key={coffee.id} coffee={coffee}/>
 
-          <RemoveButton>  <Trash color='#8047F8' weight='bold' size={16} /> REMOVER</RemoveButton>
-        </ButtonsCardContainer>
-      </div>
-    </ItemCardContainer>
   )
  }) }
 
-
+<ConfirmOrderSection />
 </CardListContainer>
 
-  {/* 
-  map cart items ?
-   get: ok
-   picture 
-   title
-   quantity
-   price
-
-create const total = quantity * price
-
- const totalItems = total + total 
-  const deliveryFee 
-const total total
-  */}
 
 </aside>
   </PageContainer>

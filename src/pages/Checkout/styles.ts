@@ -88,37 +88,11 @@ border-radius: 6px;
 export const CardListContainer = styled(FormContainer)`
 display: flex;
 flex-direction: column;
-gap: 3.5rem;
-`
+gap: 1.5rem;
 
-export const ItemCardContainer = styled.div`
-display: flex;
-gap: 1.25rem;
-align-items: center;
-
-h3 {
-  font-size: 1rem;
-  color: var(--base-subtitle);
-}
-img {
-  width: 4rem;
-}
-`
-
-export const ButtonsCardContainer = styled.div`
-display: flex;
-gap: 1rem;
-margin-top: 0.5rem;
+width: 28rem;
 
 `
 
-export const RemoveButton = styled.button`
-display: flex;
-  gap: 0.25rem;
-  align-items: center;
-  font-size: 0.75rem;
 
-  background: var(--base-button);
-  border-radius: 6px;
-  padding-inline: 0.5rem;
-`
+
