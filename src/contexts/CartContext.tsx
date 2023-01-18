@@ -13,8 +13,8 @@ interface CartContextType {
    changeCartItemsQuantity: (cartItemId: string, type: 'increase' | 'decrease') => void,
    removeCartItem: (cartItemId: string) => void,
    cartQuantity: number,
-   cartItemsTotal: number
-
+   cartItemsTotal: number,
+   clearCartItems: () => void
 }
 
 
@@ -54,7 +54,11 @@ function addCoffeeToCart(coffee: CartItem) {
   setCartItems(newCart)
 }
 
- 
+ function clearCartItems() {
+setCartItems([])
+
+ }
+
 
 function changeCartItemsQuantity(
   cartItemId: string,
@@ -104,7 +108,8 @@ return (
     changeCartItemsQuantity,
     removeCartItem,
     cartQuantity,
-    cartItemsTotal
+    cartItemsTotal, 
+    clearCartItems
   } }>
     {children}
   </CartContext.Provider>

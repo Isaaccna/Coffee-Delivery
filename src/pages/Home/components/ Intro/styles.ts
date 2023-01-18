@@ -42,7 +42,7 @@ export const DuoDescription = styled.div`
 
 export const DescriptionContainer = styled.div`
   display: flex;
-  gap: 1.25rem;
+  gap: 0.75rem;
   align-items: center;
 
   p {
