@@ -2,7 +2,7 @@ import { MapPin, CurrencyDollarSimple} from 'phosphor-react'
 import { CardListContainer, FormContainer, FormIntro,FormPaymentIntro,PageContainer } from './styles'
 
 import { CartContext, CartItem } from '../../contexts/CartContext'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { CoffeeCart } from './components/CoffeeCart'
 import { ConfirmOrderSection } from './components/ConfirmOrderSection'
 import { useForm, FormProvider } from 'react-hook-form'
@@ -10,7 +10,7 @@ import * as zod from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import { AddressForm } from './components/AddressForm'
 import { PaymentOptions } from './components/PaymentOptions'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 enum PaymentMethods{
   credit = 'credit',
@@ -20,7 +20,7 @@ enum PaymentMethods{
 
 const formValidationSchema = zod.object({
   zipcode: zod.string().min(1, 'Informe o CEP'),
-  street: zod.string().min(1, 'Informe o Rua'),
+  street: zod.string().min(1, 'Informe a Rua'),
   number: zod.string().min(1, 'Informe o Número'),
   complement: zod.string(),
   neighborhood: zod.string().min(1, 'Informe o Bairro'),
@@ -58,6 +58,8 @@ export function Checkout() {
     
     
   }
+
+
   
   return (
     <FormProvider {...confirmOrderForm}>

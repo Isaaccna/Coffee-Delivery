@@ -3,15 +3,16 @@ import ShoppingCart from '../../assets/cart-icon.png'
 import MapPin from '../../assets/map-pin.png'
 
 import { NavLink } from 'react-router-dom'
-import { CartContainer, HeaderContainer, LocationContainer } from './styles'
-import { useState } from 'react'
+import { CartContainer, CartLenght, HeaderContainer, LocationContainer } from './styles'
+import { useState, useContext } from 'react'
 import axios from 'axios'
+import {CartContext} from '../../contexts/CartContext'
 
 
 // AIzaSyCdad4nHxg8VGgF8KDjAb1mlTRkoBxNJuw
 
 export function Header() {
-
+const {cartQuantity} = useContext(CartContext)
   const [location, setLocation] = useState('')
 
   
@@ -55,6 +56,7 @@ export function Header() {
           <NavLink to="/checkout">
             <img src={ShoppingCart} alt="cart" />
           </NavLink>
+{cartQuantity > 0 ? <CartLenght> {cartQuantity} </CartLenght> : ''}
         </CartContainer>
       </nav>
     </HeaderContainer>

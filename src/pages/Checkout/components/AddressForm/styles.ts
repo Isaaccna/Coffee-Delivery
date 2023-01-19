@@ -33,6 +33,9 @@ export const InputBase = styled.input`
   font-size: 0.875rem;
   padding: 0.75rem;
 `
+export const InputFullSize = styled(InputBase)`
+width: 560px;
+`
 
 export const InputMiddleSize = styled(InputBase)`
   width: 200px;
@@ -47,4 +50,11 @@ export const HalfSizeInput = styled(InputBase)`
 `
 export const SmallSizeInput = styled(InputBase)`
 width: 60px
+`
+
+export const ErrorText = styled.p`
+color: red;
+font-weight: bold;
+font-size: 12px;
+font-family: italic;
 `
